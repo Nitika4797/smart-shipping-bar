@@ -1,9 +1,13 @@
 console.log("=== Smart Shipping Bar Loaded ===");
 
-document.addEventListener("DOMContentLoaded", function () {
+// Function to create/update bar
+function initSmartBar() {
   console.log("Adding bar...");
 
-  // Create bar element
+  // Remove old bar if exists
+  const old = document.getElementById("smart-shipping-bar");
+  if (old) old.remove();
+
   const bar = document.createElement("div");
   bar.id = "smart-shipping-bar";
   Object.assign(bar.style, {
@@ -19,10 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
     fontSize: "16px",
     zIndex: "9999",
   });
-  document.body.appendChild(bar);
-
-  // Default text first
   bar.innerHTML = "🚚 Loading shipping bar...";
+  document.body.appendChild(bar);
 
   function updateBar(total_price) {
     const target = 50; // Free shipping target
@@ -36,15 +38,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Fetch cart data
+  // Fetch Shopify cart
   fetch("/cart.js")
     .then((res) => res.json())
     .then((cart) => {
-      console.log("Cart:", cart);
+      console.log("Cart data:", cart);
       updateBar(cart.total_price);
     })
     .catch((err) => {
       console.error("Cart fetch error:", err);
       bar.innerHTML = "🚚 Free Shipping on orders over $50!";
     });
-});
+}
+
+// Run immediately (no DOMContentLoaded)
+setTimeout(initSmartBar, 1000);
+
+// Re-run when Shopify does page transitions (optional)
+document.addEventListener("shopify:section:load", initSmartBar);
+document.addEventListener("shopify:section:unload", initSmartBar);
