@@ -18,8 +18,11 @@ window.addEventListener("load", function () {
     bar.style.fontFamily = "Arial, sans-serif";
     bar.style.textAlign = "center";
     bar.style.fontSize = "16px";
-    bar.style.zIndex = "9999";
+    bar.style.zIndex = "999999";
     bar.innerText = "🚚 Free Shipping on orders over $50 – Smart Shipping Bar Active!";
 
     document.body.appendChild(bar);
+
+    // Push page content down (so bar is not hidden)
+    document.body.style.paddingTop = "50px";
 });
