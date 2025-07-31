@@ -1,10 +1,9 @@
 console.log("=== Smart Shipping Bar Loaded ===");
 
-window.addEventListener("load", function () {
-    console.log("Adding bar...");
-
-    // Prevent duplicate
+// Function to create the bar
+function createSmartBar() {
     if (document.getElementById("smart-shipping-bar")) return;
+    console.log("Adding bar...");
 
     const bar = document.createElement("div");
     bar.id = "smart-shipping-bar";
@@ -23,6 +22,13 @@ window.addEventListener("load", function () {
 
     document.body.appendChild(bar);
 
-    // Push page content down (so bar is not hidden)
+    // Push page content down
     document.body.style.paddingTop = "50px";
-});
+}
+
+// If DOM is already ready, run immediately
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", createSmartBar);
+} else {
+    createSmartBar();
+}
