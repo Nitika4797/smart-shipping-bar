@@ -1,27 +1,25 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("Smart Shipping Bar script loaded!");
+console.log("=== Smart Shipping Bar Loaded ===");
 
-    // Avoid duplicate bars
+window.addEventListener("load", function () {
+    console.log("Adding bar...");
+
+    // Prevent duplicate
     if (document.getElementById("smart-shipping-bar")) return;
 
-    // Create container
-    const container = document.createElement("div");
-    container.id = "smart-shipping-bar";
+    const bar = document.createElement("div");
+    bar.id = "smart-shipping-bar";
+    bar.style.position = "fixed";
+    bar.style.top = "0";
+    bar.style.left = "0";
+    bar.style.width = "100%";
+    bar.style.background = "#ff5733";
+    bar.style.color = "#fff";
+    bar.style.padding = "10px";
+    bar.style.fontFamily = "Arial, sans-serif";
+    bar.style.textAlign = "center";
+    bar.style.fontSize = "16px";
+    bar.style.zIndex = "9999";
+    bar.innerText = "🚚 Free Shipping on orders over $50 – Smart Shipping Bar Active!";
 
-    container.style.position = "fixed";
-    container.style.top = "0";
-    container.style.left = "0";
-    container.style.width = "100%";
-    container.style.background = "#ff5733";
-    container.style.color = "#fff";
-    container.style.padding = "10px";
-    container.style.fontFamily = "Arial, sans-serif";
-    container.style.textAlign = "center";
-    container.style.fontSize = "16px";
-    container.style.zIndex = "9999";
-
-    container.innerText = "🚚 Free Shipping on orders over $50 – Smart Shipping Bar Active!";
-
-    // Add to page
-    document.body.appendChild(container);
+    document.body.appendChild(bar);
 });
